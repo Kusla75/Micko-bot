@@ -1,0 +1,18 @@
+[
+	{
+		"words": ["tina", "тина", "nevin", "невин", "isfrustriran исфрустриран"],
+		"response": "Ma ti si brate samo nevin i isfrustriran",
+		"max_count": 3
+	},
+	{
+		"words": ["ne smeta to meni", "не смета то мени", "ulizica",
+		"улизица", "nije bitno", "није битно"],
+		"response": "Brate nisam ja taj koji ce se nadrndati ne cimam se ja oko toga\nnego vam skrecem paznju\nda vam nece svako reagovati tako\nnarocito nova masa\nkoja se bude ukljucivala",
+		"max_count": 100
+	},
+	{
+		"words": ["was", "wie", "wo", "ich", "sein", "auf", "ein"],
+		"response": "Čoveče ja tebe ne mogu.\nPricamo istim jezikom,\nali te ništa ne razumem",
+		"max_count": 100
+	}
+]

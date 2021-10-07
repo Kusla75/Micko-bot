@@ -1,11 +1,22 @@
-triggers = [  
-    ('tina', 'nevin', 'isfrustriran'),
-    ('ne smeta to meni', 'ulizica'),
-    ('wie', 'ich', 'sein', 'auf', 'ein', 'was', 'wo', 'ist')
-]
+import json
+import os
 
-response = [
-    'Ma ti si brate samo nevin i isfrustriran',
-    'Brate nisam ja taj koji ce se nadrndati ne cimam se ja oko toga\nnego vam skrecem paznju\nda vam nece svako reagovati tako\nnarocito nova masa\nkoja se bude ukljucivala',
-    'Čoveče ja tebe ne mogu.\nPricamo istim jezikom,\nali te ništa ne razumem'
-]
+triggers = []
+
+class Trigger:
+	def __init__(self, words, response, count, max_count):
+		self.words = words
+		self.response = response
+		self.count = count
+		self.max_count = max_count
+
+with open('data/triggers.json', 'r') as f:
+	json_file = json.load(f)
+
+	for elem in json_file:
+		triggers.append(Trigger(
+			elem["words"], 
+			elem["response"], 
+			elem["max_count"],
+			elem["max_count"]
+			))

@@ -1,27 +1,29 @@
 import discord
 import os
-from triggers import *
+from triggers import triggers
+from var import test_channel_ID
+import module as m
 
-client = discord.Client()
+bot = discord.Client()
 
-@client.event
+@bot.event
 async def on_ready():
-    print('{0.user} successfully started'.format(client))
+	print('{0} successfully started!'.format(bot.user))
 
-@client.event
+@bot.event
 async def on_message(message):
-    
-    if message.author == client.user:
-        return
 
-    if message.content.startswith('-'):
-        await message.channel.send('Ova budala mi još nije dala komande')
-    else:
-        for ind, trigger_tuple in enumerate(triggers):
-            for t in trigger_tuple:
-                if t in message.content.lower():
-                    await message.channel.send(response[ind])
-                    break
-            
+	if message.author == bot.user:
+		return
 
-client.run(os.getenv('TOKEN'))
+	if message.channel != bot.get_channel(test_channel_ID):
+		return
+
+	if message.content.startswith('-'):
+		await message.channel.send('Ova budala mi još nije dala komande')
+	else:
+		reply = m.check_message_for_trigger(message, triggers)
+		if reply != "":
+			await message.channel.send(reply)
+
+bot.run(os.getenv('TOKEN'))
