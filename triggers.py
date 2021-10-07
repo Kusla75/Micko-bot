@@ -10,6 +10,9 @@ class Trigger:
 		self.count = count
 		self.max_count = max_count
 
+	def restart_count(self):
+		self.count = self.max_count
+
 with open('data/triggers.json', 'r') as f:
 	json_file = json.load(f)
 
