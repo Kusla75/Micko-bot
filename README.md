@@ -1,2 +1,2 @@
 # Micko-bot
-Custom bot made for my university server
+Custom bot made for my discord server
