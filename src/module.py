@@ -1,6 +1,19 @@
 import time as t
 import var as v
 import discord
+import os
+import random as r
+
+def get_fortune():
+    fortunes = ''
+
+    with open(os.getenv('FORTUNE_FILE'), 'r') as f:
+        for line in f.readlines():
+            fortunes += line
+        fortunes = fortunes.split('%\n')
+    
+    rand_index = r.randint(0, len(fortunes)-1)
+    return '\n' + fortunes[rand_index]
 
 def check_message_for_trigger(message, triggers):
 	responded = False
@@ -67,6 +80,6 @@ def generate_show_embed():
 
 	return embed
 
-def generate_embed(desc):
-	embed = discord.Embed(description=desc, color=v.blue_hex)
+def generate_embed(t='', desc=''):
+	embed = discord.Embed(title=t, description=desc, color=v.blue_hex)
 	return embed

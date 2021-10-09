@@ -5,16 +5,17 @@ from datetime import datetime
 from triggers import triggers
 import var as v
 import module as m
-from fortunate import Fortunate
+from alive import keep_alive
 
 bot = discord.Client()
-fortune_generator = Fortunate(os.getenv['FORTUNE_FILE'])
 
 @bot.event
 async def on_ready():
 	print()
 	print(f'{bot.user} successfully started!\n')
 	print("Logs: \n")
+	await bot.change_presence(activity=discord.Game(name="-help"))
+
 
 @tasks.loop(hours=1.0)
 async def message_of_the_day():
@@ -26,13 +27,13 @@ async def message_of_the_day():
 		await channel.send(v.daily_message)
 		[trigger.restart_count() for trigger in triggers]
 	if now.hour + 2 == v.global_vars['fortune_message_hour']:
-		await channel.send(fortune_generator())
-	
+		fortune_embed = m.generate_embed('Mudrolija dana :thinking:', m.get_fortune())
+		await channel.send(embed=fortune_embed)
 		
+	
 @bot.event
 async def on_message(message):
 
-	print(fortune_generator())
 	if message.author == bot.user:
 		return
 	if message.channel.id != v.test_channel_ID:
@@ -49,12 +50,16 @@ async def on_message(message):
 				embed_reply = m.generate_set_embed(m.set_var(message))
 				await message.channel.send(embed=embed_reply)
 
+			elif message.content.startswith('-restart') and is_allowed:
+				[trigger.restart_count() for trigger in triggers]
+				await message.channel.send(embed=m.generate_set_embed(True))
+
 			elif message.content.startswith('-show') and is_allowed:
 				embed_reply = m.generate_show_embed();
 				await message.channel.send(embed=embed_reply)
 
 			elif message.content.startswith('-quit') and is_allowed:
-				embed_reply = m.generate_embed("Idem u večiti san... :sleeping:")
+				embed_reply = m.generate_embed(desc="Idem u večiti san... :sleeping:")
 				await message.channel.send(embed=embed_reply)
 				print(f"Shutting down {bot.user}\n")
 				await bot.close()
@@ -71,5 +76,6 @@ async def on_message(message):
 			await message.reply(reply)
 			m.log_reply(message, reply)
 
+keep_alive()
 message_of_the_day.start()
 bot.run(os.getenv('TOKEN'))
