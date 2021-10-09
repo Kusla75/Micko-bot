@@ -1,7 +1,6 @@
 import json
 
 triggers = []
-cooldown = 360
 
 class Trigger:
 	def __init__(self, words, response, epoch_t, count, max_count):

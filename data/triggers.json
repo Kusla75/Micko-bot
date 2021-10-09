@@ -1,23 +1,34 @@
 [
 	{
-		"words": ["tina", "тина", "nevin", "невин", "isfrustriran исфрустриран"],
+		"words": ["_test"],
+		"response": "_Test",
+		"max_count": 100
+	},
+	{
+		"words": ["tina","тина","nevin","невин","isfrustriran","исфрустриран"],
 		"response": "Ma ti si brate samo nevin i isfrustriran",
-		"max_count": 10
+		"max_count": 15
 	},
 	{
-		"words": ["ne smeta to meni", "не смета то мени", "ulizica",
-		"улизица", "nije bitno", "није битно"],
+		"words": ["ne smeta to meni","не смета то мени","ulizica",
+		"улизица","nije bitno","није битно"],
 		"response": "Brate nisam ja taj koji ce se nadrndati ne cimam se ja oko toga\nnego vam skrecem paznju\nda vam nece svako reagovati tako\nnarocito nova masa\nkoja se bude ukljucivala",
-		"max_count": 10
+		"max_count": 15
 	},
 	{
-		"words": ["was", "wie", "wo", "ich", "sein", "auf", "ein"],
+		"words": ["was","wie","wo","ich","sein","auf","ein"],
 		"response": "Čoveče ja tebe ne mogu.\nPricamo istim jezikom,\nali te ništa ne razumem",
-		"max_count": 10
+		"max_count": 15
 	},
 	{
-		"words": ["kurac", "sranje", "jebote", "jebiga", "jebem mu"],
+		"words": ["kurac","курац","sranje","срање","jebote","јеботе","jebiga","јебига","jebem mu","јебем му","jebacu","јебаћу"],
 		"response": "Nemoj da psuješ, jebem mu mater!",
-		"max_count": 10
+		"max_count": 15
+	},
+	{
+		"words": ["є", "ꙁ", "ꙉ", "ѣ", "ю", "ꙑ", "ь", "ъ", "ѿ", "щ"],
+		"response": "Kakvi su ovo demonski jezici!",
+		"max_count": 15
 	}
+
 ]
