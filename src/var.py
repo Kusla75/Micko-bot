@@ -14,6 +14,6 @@ blue_hex = 0x6495ED
 global_vars = {
 	"cooldown": 69,
 	"daily_message_hour": 7,
-	"fortune_message_hour": 12,
+	"fortune_message_hour": 13,
 	"mute_count": 6
 }

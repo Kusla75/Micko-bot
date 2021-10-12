@@ -21,13 +21,15 @@ async def on_ready():
 async def message_of_the_day():
 	await bot.wait_until_ready()
 
-	channel = bot.get_channel(v.test_channel_ID)
+	channel = bot.get_channel(v.main_chat_ID)
 	now = datetime.now()
+
 	if now.hour + 2 == v.global_vars['daily_message_hour']:
 		await channel.send(v.daily_message)
 		[trigger.restart_count() for trigger in triggers]
+
 	if now.hour + 2 == v.global_vars['fortune_message_hour']:
-		fortune_embed = m.generate_embed('Mudrolija dana :thinking:', m.get_fortune())
+		fortune_embed = m.generate_embed('Mudrolija dana :scroll:', m.get_fortune())
 		await channel.send(embed=fortune_embed)
 		
 	
@@ -36,8 +38,8 @@ async def on_message(message):
 
 	if message.author == bot.user:
 		return
-	if message.channel.id != v.test_channel_ID:
-		return
+	# if message.channel.id != v.test_channel_ID:
+	# 	return
 
 	if message.content.startswith('-'):
 
@@ -54,9 +56,13 @@ async def on_message(message):
 				[trigger.restart_count() for trigger in triggers]
 				await message.channel.send(embed=m.generate_set_embed(True))
 
-			elif message.content.startswith('-show') and is_allowed:
+			elif message.content.startswith('-show'):
 				embed_reply = m.generate_show_embed();
 				await message.channel.send(embed=embed_reply)
+
+			# elif message.content.startswith('-fortune') and is_allowed:
+			# 	embed_reply = m.generate_embed('Mudrolija :scroll:', m.get_fortune())
+			# 	await message.channel.send(embed=embed_reply)
 
 			elif message.content.startswith('-quit') and is_allowed:
 				embed_reply = m.generate_embed(desc="Idem u večiti san... :sleeping:")
@@ -77,5 +83,6 @@ async def on_message(message):
 			m.log_reply(message, reply)
 
 keep_alive()
+os.system('clear')
 message_of_the_day.start()
 bot.run(os.getenv('TOKEN'))

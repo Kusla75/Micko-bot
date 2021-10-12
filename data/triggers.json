@@ -5,7 +5,7 @@
 		"max_count": 100
 	},
 	{
-		"words": ["tina","тина","nevin","невин","isfrustriran","исфрустриран"],
+		"words": ["tina","тина","tinu","тину","krumbelj","крумбељ","nevin","невин","isfrustriran","исфрустриран"],
 		"response": "Ma ti si brate samo nevin i isfrustriran",
 		"max_count": 7
 	},
@@ -16,18 +16,28 @@
 		"max_count": 7
 	},
 	{
-		"words": ["was","wie","wo","ich","sein","auf","ein"],
+		"words": ["was","wie","ich","sein","auf","fur","ein","ä","ö","ü"],
 		"response": "Čoveče ja tebe ne mogu.\nPricamo istim jezikom,\nali te ništa ne razumem",
 		"max_count": 7
 	},
 	{
-		"words": ["kurac","курац","sranje","срање","jebote","јеботе","jebiga","јебига","jebem mu","јебем му","jebacu","јебаћу","picka","пичка","picku","пичку"],
+		"words": ["kurac","курац","sranje","срање","jebote","јеботе","jebiga","јебига","jebem mu","јебем му","jebacu","јебаћу","picka","пичка","picku","пичку","jebo","јебо"],
 		"response": "Nemoj da psuješ, jebem mu mater!",
 		"max_count": 7
 	},
 	{
 		"words": ["є", "ꙁ", "ꙉ", "ѣ", "ю", "ꙑ", "ь", "ъ", "ѿ", "щ"],
 		"response": "Kakvi su ovo demonski jezici!",
+		"max_count": 7
+	},
+	{
+		"words": ["kevic", "kević", "кевић"],
+		"response": "<@287717701571444736> i <@336838083951460352> jeste vas dvojica isti smijer?\nKontam da ste braća",
+		"max_count": 1
+	},
+	{
+		"words": ["čujete","cujete","чујете"],
+		"response": "VIČITE!!! DA, NE?",
 		"max_count": 7
 	}
 
