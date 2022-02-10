@@ -3,6 +3,10 @@ import var as v
 import discord
 import os
 import random as r
+import hashlib
+from urllib.request import urlopen, Request
+import requests
+
 
 def get_fortune():
     fortunes = ''
@@ -83,3 +87,60 @@ def generate_show_embed():
 def generate_embed(t='', desc=''):
 	embed = discord.Embed(title=t, description=desc, color=v.blue_hex)
 	return embed
+
+def bodovi(message):
+	bodovi = message.content.split(" ")
+	bodovi = bodovi[1:]
+
+	prosek = 0
+	for b in bodovi:
+		if(int(b) < 0 or int(b) > 100):
+			return "Sigurno nemaš ovoliko bodova :neutral_face:"
+		else:
+			prosek += int(b)
+	prosek = prosek / len(bodovi)		
+
+	konacno = 0
+	if(prosek >= 40):
+		konacno = 49/60 * prosek + 55/3
+		konacno = round(konacno, 2)
+		mess = str(konacno) + " bodova\n"
+	elif(prosek < 40):
+		return "Brate moj nisi ti tu algebru položio :cry:"
+	else:
+		return "Doslo je do greske pri racunanju bodova!"
+	
+	mess += "Ocena: "
+	if(konacno >= 91):
+		mess += ":keycap_ten:"
+	elif(konacno < 91 and konacno >= 81):
+		mess += ":nine:" 
+	elif(konacno < 81 and konacno >= 71):
+		mess += ":eight:" 
+	elif(konacno < 71 and konacno >= 61):
+		mess += ":seven:" 
+	elif(konacno < 61 and konacno >= 51):
+		mess += ":six:"
+	else:
+		pass
+
+	return mess
+
+# def check_site_changes():
+# 	if v.tracked_sites_size == []:
+# 		for i, link in enumerate(v.tracked_sites):
+# 			request = urlopen(link)
+# 			v.tracked_sites_size.append(len(request.read()))
+# 			t.sleep(10)
+# 			return False
+# 	else:
+# 		for i, link in enumerate(v.tracked_sites):
+# 			request = urlopen(link)
+# 			new_length = len(request.read())
+
+# 			if abs(v.tracked_sites_size[i]-new_length) > 450:
+# 				v.tracked_sites_size[i] = new_length
+# 				return True
+# 			else:
+# 				v.tracked_sites_size[i] = new_length
+# 				return False

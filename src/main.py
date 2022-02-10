@@ -24,15 +24,26 @@ async def message_of_the_day():
 	channel = bot.get_channel(v.main_chat_ID)
 	now = datetime.now()
 
-	if now.hour + 2 == v.global_vars['daily_message_hour']:
+	if now.hour + 1 == v.global_vars['daily_message_hour']:
 		await channel.send(v.daily_message)
 		[trigger.restart_count() for trigger in triggers]
 
-	if now.hour + 2 == v.global_vars['fortune_message_hour']:
+	if now.hour + 1 == v.global_vars['fortune_message_hour']:
 		fortune_embed = m.generate_embed('Mudrolija dana :scroll:', m.get_fortune())
 		await channel.send(embed=fortune_embed)
-		
-	
+
+	if v.zarko_rodjus.day == now.day and v.zarko_rodjus.month == now.month:
+		await channel.send('<@247304833072234496> Srećan srećan rođendan! Sve najbolje želete ti Serbian i koleginice :heart:\nJoš dugo godina u menzi da se hraniš i u Kikindu da se ne vratiš :sunglasses:!\n\n' + v.serbian_link)
+
+# @tasks.loop(minutes=5)
+# async def site_changes():
+# 	await bot.wait_until_ready()
+
+# 	if v.tracked_sites != []:
+# 		test_channel = bot.get_channel(v.test_channel_ID)
+# 		if(m.check_site_changes()):
+# 			await test_channel.send(f"<@350620304877289474>\n Promene na {v.tracked_sites[0]}")		
+
 @bot.event
 async def on_message(message):
 
@@ -60,9 +71,19 @@ async def on_message(message):
 				embed_reply = m.generate_show_embed();
 				await message.channel.send(embed=embed_reply)
 
-			# elif message.content.startswith('-fortune') and is_allowed:
-			# 	embed_reply = m.generate_embed('Mudrolija :scroll:', m.get_fortune())
-			# 	await message.channel.send(embed=embed_reply)
+			elif message.content.startswith('-fortune'): #and is_allowed:
+				embed_reply = m.generate_embed('Mudrolija :scroll:', m.get_fortune())
+				await message.channel.send(embed=embed_reply)
+
+			elif message.content.startswith('-algebra'):
+				bodovi_mess = m.bodovi(message)
+				embed_reply = m.generate_embed(f'{message.author.nick} bodovi iz algebre: ', bodovi_mess)
+				await message.channel.send(embed=embed_reply)
+
+			# elif message.content.startswith('-track'):
+			# 	embed_reply = m.generate_embed(desc="Sajt zapraćen :eyes:")
+			# 	link = message.content.split(" ")[1]
+			# 	v.tracked_sites.append(link)
 
 			elif message.content.startswith('-quit') and is_allowed:
 				embed_reply = m.generate_embed(desc="Idem u večiti san... :sleeping:")
@@ -85,4 +106,5 @@ async def on_message(message):
 keep_alive()
 os.system('clear')
 message_of_the_day.start()
+# site_changes.start()
 bot.run(os.getenv('TOKEN'))
